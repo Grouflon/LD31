@@ -6,14 +6,20 @@ if (typeof define !== 'function') {
  * ===================================*/
 define([
         "playgroundjs/game",
-		"worlds/sandbox"
+		"playgroundjs/resources",
+		"worlds/sandbox",
+		"worlds/level"
     ]
-	, function (Game, Sandbox)
+	, function (Game, Resources, Sandbox, Level)
     {
         // Game Parameters
         var game = new Game("container", 800, 600, "#333");
         game.debug = true;
 
-		game.world = new Sandbox;
+		var xml = Resources.loadXML("level0", "data/maps/level0.oel", function()
+		{
+			game.world = new Level(xml.value);
+		});
+
         game.start();
 	});

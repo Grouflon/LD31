@@ -54,6 +54,7 @@ define([
 			if (Keyboard.check(Keys.RIGHT) || Keyboard.check(Keys.D)) this._mover.moveRight();
 			if (Keyboard.pressed(Keys.UP) || Keyboard.pressed(Keys.W)) this._mover.jump();
 			if (Keyboard.pressed(Keys.SPACE)) this.togglePower();
+
 		};
 
 		Player.prototype.togglePower = function()

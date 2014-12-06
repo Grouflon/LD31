@@ -44,6 +44,16 @@ define([
                     break;
                 }
 
+				case Resource.types.XML:
+				{
+					Data.loadXML(path, function(data)
+					{
+						this._value = data;
+						this._onLoad();
+					}.bind(this));
+					break;
+				}
+
                 case Resource.types.AUDIO:
                 {
                     this._value = new Audio(path);
@@ -86,7 +96,8 @@ define([
         Resource.types = {
             IMAGE: 0,
             AUDIO: 1,
-            JSON: 2
+            JSON: 2,
+			XML: 3
         };
 
 

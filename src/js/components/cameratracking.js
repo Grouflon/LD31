@@ -21,7 +21,7 @@ define([
 
 		CameraTracking.prototype.start = function()
 		{
-
+			this.parent.world.setCamera(this._parent.x - this.parent.game.width / 2, this._parent.y - this.parent.game.height / 2);
 		};
 
 		CameraTracking.prototype.update = function(elapsed)

@@ -22,6 +22,11 @@ define([
             return this._load(Resource.types.JSON, name, path, callback);
         };
 
+		Resources.loadXML = function(name, path, callback)
+		{
+			return this._load(Resource.types.XML, name, path, callback);
+		};
+
         Resources.loadAudio = function(name, path, callback)
         {
             return this._load(Resource.types.AUDIO, name, path, callback);
