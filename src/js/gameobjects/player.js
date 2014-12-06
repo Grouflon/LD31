@@ -19,6 +19,10 @@ define([
 		Player.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
 
+		Object.defineProperty(Player.prototype, "facing", {
+			get: function() { return this._facing; }
+		});
+
 		function Player(x, y)
 		{
 			GameObject.call(this, "Player", x, y);
@@ -55,6 +59,9 @@ define([
 			if (Keyboard.pressed(Keys.UP) || Keyboard.pressed(Keys.W)) this._mover.jump();
 			if (Keyboard.pressed(Keys.SPACE)) this.togglePower();
 
+			if (this._mover._velocity.x > 0) this._facing = 1;
+			else if (this._mover._velocity.x < 0) this._facing = -1;
+
 			if (this.collideFirst(this.x, this.y, "trap"))
 			{
 				this.destroy();
@@ -68,6 +75,7 @@ define([
 		};
 
 		/**** PRIVATE ****/
+		Player.prototype._facing = 1;
 		Player.prototype._mover = null;
 		Player.prototype._repeater = null;
 		Player.prototype._cameraTracking = null;

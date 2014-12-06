@@ -5,13 +5,15 @@ if (typeof define !== 'function') {
  * CameraTracking Component
  * ===================================*/
 define([
-		"playgroundjs/component"
+		"playgroundjs/component",
+		"playgroundjs/utils/math/vector2"
 	]
-	, function (Component)
+	, function (Component, Vector2)
 	{
 		CameraTracking.prototype = Object.create(Component.prototype);
 
-		CameraTracking.prototype.acceleration = 0.2;
+		CameraTracking.prototype.acceleration = 0.15;
+		CameraTracking.prototype.offset = 60;
 
 		/**** PUBLIC ****/
 		function CameraTracking()
@@ -27,8 +29,11 @@ define([
 		CameraTracking.prototype.update = function(elapsed)
 		{
 			var camera = this.parent.world.camera;
-			camera.x = (this._parent.x - this.parent.game.width / 2) * this.acceleration + camera.x * (1 - this.acceleration);
-			camera.y = (this._parent.y - this.parent.game.height / 2) * this.acceleration + camera.y * (1 - this.acceleration);
+			var desiredCamera = new Vector2;
+			desiredCamera.x = this._parent.x - this.parent.game.width / 2 + this.offset * this.parent.facing;
+			desiredCamera.y = this._parent.y - this.parent.game.height / 2;
+			camera.x = desiredCamera.x * this.acceleration + camera.x * (1 - this.acceleration);
+			camera.y = desiredCamera.y * this.acceleration + camera.y * (1 - this.acceleration);
 			this.parent.world.setCamera(camera.x, camera.y);
 		};
 
