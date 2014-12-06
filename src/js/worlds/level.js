@@ -7,9 +7,10 @@ if (typeof define !== 'function') {
 define([
 		"playgroundjs/world",
 		"gameobjects/player",
-		"gameobjects/obstacle"
+		"gameobjects/obstacle",
+		"gameobjects/trap"
 	]
-	, function (World, Player, Obstacle)
+	, function (World, Player, Obstacle, Trap)
 	{
 		Level.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -23,18 +24,11 @@ define([
 		Level.prototype.begin = function()
 		{
 			this._generateLevel(this._data);
-			/*var player = new Player(this.game.width / 2 - 200, this.game.height / 2 - 100);
-			this.addChild(player);
-
-			var o0 = new Obstacle(0, 400, 350, 20);
-			var o1 = new Obstacle(450, 400, 350, 20);
-			this.addChild(o0);
-			this.addChild(o1);*/
 		};
 
 		Level.prototype.update = function(elapsed)
 		{
-			//console.log(this.activeColliders.length);
+
 		};
 
 		/**** PRIVATE ****/
@@ -68,7 +62,14 @@ define([
 			for (var i in node.childNodes)
 			{
 				tile = node.childNodes[i];
-				this.addChild(new Obstacle(this._tileSize * tile.x, this._tileSize * tile.y, this._tileSize, this._tileSize));
+				if (tile.tx == 0 && tile.ty == 0)
+				{
+					this.addChild(new Obstacle(this._tileSize * tile.x, this._tileSize * tile.y, this._tileSize, this._tileSize));
+				}
+				else if (tile.tx == 1 && tile.ty == 0)
+				{
+					this.addChild(new Trap(this._tileSize * tile.x, this._tileSize * tile.y, this._tileSize, this._tileSize));
+				}
 			}
 		};
 
@@ -82,8 +83,8 @@ define([
 				{
 					case "spawn":
 					{
-						this._player = new Player(parseFloat(entity.x), parseFloat(entity.y));
-						this.addChild(this._player);
+						//this._player = new Player(parseFloat(entity.x), parseFloat(entity.y));
+						this.addChild(new Player(parseFloat(entity.x), parseFloat(entity.y)));
 						break;
 					}
 
@@ -93,7 +94,7 @@ define([
 		};
 
 		Level.prototype._data = null;
-		Level.prototype._player = null;
+		//Level.prototype._player = null;
 		Level.prototype._tileSize = 32;
 
 		return Level;

@@ -110,6 +110,7 @@ define([
         /** Override these functions for custom behavior **/
         GameObject.prototype.start = function() {};
         GameObject.prototype.update = function(elapsed) {};
+        GameObject.prototype.destroyed = function(elapsed) {};
 
 
         GameObject.prototype.collideFirst = function(x, y, types, sample)
@@ -178,26 +179,10 @@ define([
 			return result;
 		};
 
-		/**
-		 * Called when the GameObject collides along the X axis during a moveBy call
-		 * Override to add logic
-		 * @param gameObject	{GameObject}	Collided GameObject
-		 * @returns 			{boolean}		Validate or invalidate the collision
-		 */
-		GameObject.prototype.moveCollideX = function(gameObject) {
-			return true;
+		GameObject.prototype.destroy = function()
+		{
+			this._toDestroy = true;
 		};
-
-		/**
-		 * Called when the GameObject collides along the Y axis during a moveBy call
-		 * Override to add logic
-		 * @param gameObject	{GameObject}	Collided GameObject
-		 * @returns 			{boolean}		Validate or invalidate the collision
-		 */
-		GameObject.prototype.moveCollideY = function(gameObject) {
-			return true;
-		};
-
 
         /**** PRIVATE ****/
 
@@ -210,7 +195,14 @@ define([
             }
         };
 
+		GameObject.prototype._destroy = function()
+		{
+			this.parent = null;
+			this.destroyed();
+		};
+
         GameObject.prototype._started = false;
+        GameObject.prototype._toDestroy = false;
         GameObject.prototype._world = null;
 
         return GameObject;

@@ -36,7 +36,7 @@ define([
 
         Node.prototype.addChild = function(node)
         {
-            if (node == this) { console.error(name + ": a node cannot be its own child."); return; }
+            if (node == this) { console.error(this.name + ": a node cannot be its own child."); return; }
             if (this.isChild(node)) return;
 
             if (node instanceof BarrenNode)
@@ -48,8 +48,21 @@ define([
                 node.sParentChanged.addOnce(function() { this._onChildUnparented(node); }.bind(this));
                 this._sChildAdded.dispatch(node);
             }
-            else console.error(name + ": cannot add as a child an object that is not a node.");
+            else console.error(this.name + ": cannot add as a child an object that is not a node.");
         };
+
+		Node.prototype.removeChild = function(node)
+		{
+			if (!this.isChild(node)) return;
+
+			if (node instanceof BarrenNode)
+			{
+				node._parent = null;
+				node._sParentChanged.dispatch();
+				this._children.splice(this._children.indexOf(node), 1);
+			}
+			else console.error(this.name + ": cannot remove as a child an object that is not a node.");
+		};
 
 
         Node.prototype.isChild = function(node)

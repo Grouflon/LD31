@@ -89,9 +89,20 @@ define([
                     for (var i in node._children) recUpdate(node._children[i]);
                 }
             };
-            recUpdate(this);
 
-            // TODO: safe destroy
+			var recDestroy = function(node)
+			{
+				if (node instanceof Node)
+				{
+					for (var i in node._children) recDestroy(node._children[i]);
+				}
+				if (typeof node._toDestroy !== "undefined" && node._toDestroy)
+				{
+					node._destroy();
+				}
+			};
+            recUpdate(this);
+            recDestroy(this);
         };
 
 
@@ -118,7 +129,7 @@ define([
             recDraw(this, Matrix3.getIdentity());
 
             ctx.save();
-            ctx.translate(-this._camera.x, -this._camera.y);
+            ctx.translate(Math.round(-this._camera.x), Math.round(-this._camera.y));
             graphics.sort(function(a, b) { return a.g.layer <= b.g.layer ? -1 : 1; });
             for (i in graphics)
             {

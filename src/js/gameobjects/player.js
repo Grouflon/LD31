@@ -55,6 +55,10 @@ define([
 			if (Keyboard.pressed(Keys.UP) || Keyboard.pressed(Keys.W)) this._mover.jump();
 			if (Keyboard.pressed(Keys.SPACE)) this.togglePower();
 
+			if (this.collideFirst(this.x, this.y, "trap"))
+			{
+				this.destroy();
+			}
 		};
 
 		Player.prototype.togglePower = function()

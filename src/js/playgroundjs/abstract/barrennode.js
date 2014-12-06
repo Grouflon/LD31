@@ -17,9 +17,10 @@ define([
             get: function () { return this._parent; },
             set: function(value)
             {
-                if (value && value != this._parent)
+                if (value != this._parent)
                 {
-                    if (typeof value.addChild === "function") value.addChild(this);
+					if (this._parent) this._parent.removeChild(this);
+					if (value && typeof value.addChild === "function") value.addChild(this);
                 }
             }
         });

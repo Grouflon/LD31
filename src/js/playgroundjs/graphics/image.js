@@ -17,9 +17,9 @@ define([
 		{
 			Graphic.call(this, "Image", x, y);
 
+			this._image = image;
             this._canvas.width = this._image.width;
             this._canvas.height = this._image.height;
-            this._image = image;
             this._preRender();
         }
 

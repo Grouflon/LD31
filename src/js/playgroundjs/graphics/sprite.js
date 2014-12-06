@@ -54,6 +54,12 @@ define([
 			}
 		};
 
+		Sprite.prototype.setFrame = function(id)
+		{
+			this.stop();
+			this._cursor = this._getFrameCursor(id);
+		};
+
 
 		Sprite.prototype.play = function(anim, startFrame) {
 			if (this._currentAnim != this._animations[anim] || this._complete) {
@@ -103,7 +109,7 @@ define([
 			context.globalAlpha = this.alpha;
 			if (transformMatrix)
 			{
-				context.setTransform(
+				context.transform(
 					transformMatrix.get(0,0),
 					transformMatrix.get(1,0),
 					transformMatrix.get(0,1),
