@@ -14,9 +14,9 @@ define([
 
         CircleCollider.prototype.radius = 0.0;
 
-        function CircleCollider(radius, x, y)
+        function CircleCollider(radius, x, y, type)
         {
-            Collider.call(this, x, y);
+            Collider.call(this, x, y, type);
             this.radius = radius;
             this._shape = Collider.shapes.CIRCLE;
         }

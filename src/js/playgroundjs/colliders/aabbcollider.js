@@ -33,9 +33,9 @@ define([
             };}
         });
 
-        function AABBCollider(width, height, x, y)
+        function AABBCollider(width, height, x, y, type)
         {
-            Collider.call(this, x, y);
+            Collider.call(this, x, y, type);
             this._shape = Collider.shapes.AABB;
             this._width = width;
             this._height = height;

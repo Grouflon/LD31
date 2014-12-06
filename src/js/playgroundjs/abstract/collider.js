@@ -16,9 +16,10 @@ define([
         Collider.prototype.enabled = true;
         Collider.prototype.type = null;
 
-        function Collider(x, y)
+        function Collider(x, y, type)
         {
             SpatialNode.call(this, "Collider", x, y);
+			this.type = type;
         }
 
         Collider.prototype.collidesWith = function(collider)
