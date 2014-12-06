@@ -19,6 +19,10 @@ define([
 
 			d2r : function(angle) {
 				return angle * Math.PI / 180;
+			},
+
+			sign: function (x) {
+				return typeof x === 'number' ? x ? x < 0 ? -1 : 1 : x === x ? 0 : NaN : NaN;
 			}/*,
 
 			linesIntersects : function(xA1, yA1, xA2, yA2, xB1, yB1, xB2, yB2) {
