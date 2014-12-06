@@ -11,7 +11,7 @@ define([
 	, function (Game, Sandbox)
     {
         // Game Parameters
-        var game = new Game("container", 800, 600, "#000");
+        var game = new Game("container", 800, 600, "#333");
         game.debug = true;
 
 		game.world = new Sandbox;

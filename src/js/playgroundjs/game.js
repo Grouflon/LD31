@@ -116,8 +116,8 @@ define([
 				}
                 this._world = this._nextWorld;
                 this._nextWorld = null;
-                this._world.begin();
-                this._world._game = this;
+				this._world._game = this;
+				this._world.begin();
 				this._logInfo("Started world \"" + this._world.name + "\"");
             }
         };
@@ -133,10 +133,10 @@ define([
         {
             if (this._debug) this._stats.begin();
 
+			this._switchWorld();
             this._updateTime();
             this._update();
             this._draw();
-            this._switchWorld();
 
             Mouse._reset();
             Keyboard._reset();
