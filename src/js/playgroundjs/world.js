@@ -30,6 +30,16 @@ define([
             get: function () { return this._camera.clone(); }
         });
 
+		Object.defineProperty(World.prototype, "cameraAABB", {
+			get: function ()
+			{
+				return {
+					min: { x: this._camera.x, y: this._camera.y },
+					max: { x: this._camera.x + this.game.width, y: this._camera.y + this.game.height }
+				};
+			}
+		});
+
         Object.defineProperty(World.prototype, "activeColliders", {
             get : function() {
                 var colliders = [];

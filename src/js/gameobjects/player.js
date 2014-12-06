@@ -10,9 +10,10 @@ define([
 		"playgroundjs/colliders/aabbcollider",
 		"playgroundjs/input/keyboard",
 		"playgroundjs/utils/keys",
-		"components/platformermover"
+		"components/platformermover",
+		"components/repeater"
 	]
-	, function (GameObject, Rectangle, AABBCollider, Keyboard, Keys, PlatformerMover)
+	, function (GameObject, Rectangle, AABBCollider, Keyboard, Keys, PlatformerMover, Repeater)
 	{
 		Player.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
@@ -21,12 +22,25 @@ define([
 		{
 			GameObject.call(this, "Player", x, y);
 
-			this.addChild(new Rectangle(20, 40, "#fff", -10, -40));
-			this.addChild(new AABBCollider(20, 40, -10, -40, "player"));
+			var clonePattern = function(x, y, target)
+			{
+				var elements = [
+					new Rectangle(20, 40, "#fff", x - 10, y - 40),
+					new AABBCollider(20, 40, x - 10, y - 40, "player")
+				];
+				target.addChild(elements[0]);
+				target.addChild(elements[1]);
+				return elements;
+			};
+
+			clonePattern(0, 0, this);
 
 			this._mover = new PlatformerMover();
 			this._mover.collideTypes = "solid";
 			this.addChild(this._mover);
+
+			this._repeater = new Repeater(clonePattern);
+			this.addChild(this._repeater);
 		}
 
 		Player.prototype.update = function(elapsed)
@@ -38,6 +52,7 @@ define([
 
 		/**** PRIVATE ****/
 		Player.prototype._mover = null;
+		Player.prototype._repeater = null;
 
 		return Player;
 	});
