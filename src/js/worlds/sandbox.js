@@ -6,9 +6,10 @@ if (typeof define !== 'function') {
  * ===================================*/
 define([
 		"playgroundjs/world",
-		"gameobjects/player"
+		"gameobjects/player",
+		"gameobjects/obstacle"
 	]
-	, function (World, Player)
+	, function (World, Player, Obstacle)
 	{
 		Sandbox.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -22,6 +23,9 @@ define([
 		{
 			var player = new Player(this.game.width / 2, this.game.height / 2);
 			this.addChild(player);
+
+			var o0 = new Obstacle(100, 400, 500, 20);
+			this.addChild(o0);
 		};
 
 		return Sandbox;
