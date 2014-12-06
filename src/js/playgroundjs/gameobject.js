@@ -7,9 +7,10 @@ if (typeof define !== 'function') {
 define([
         'playgroundjs/abstract/spatialnode',
         'playgroundjs/world',
-        'playgroundjs/abstract/collider'
+        'playgroundjs/abstract/collider',
+        'playgroundjs/abstract/graphic'
     ]
-    , function (SpatialNode, World, Collider)
+    , function (SpatialNode, World, Collider, Graphic)
     {
         GameObject.prototype = Object.create(SpatialNode.prototype);
         /**** PUBLIC ****/
@@ -43,7 +44,7 @@ define([
         });
 
         Object.defineProperty(GameObject.prototype, "activeColliders", {
-            get : function() {
+            get: function() {
                 var colliders = [];
                 for (var i in this._children)
                 {
@@ -52,6 +53,49 @@ define([
                 return colliders;
             }
         });
+
+		Object.defineProperty(GameObject.prototype, "activeGraphics", {
+			get: function() {
+				var graphics = [];
+				for (var i in this._children)
+				{
+					if (this._children[i] instanceof Graphic && this._children[i].enabled) graphics.push(this._children[i]);
+				}
+				return graphics;
+			}
+		});
+
+		Object.defineProperty(GameObject.prototype, "collisionGlobalAABB", {
+			get: function() {
+				var colliders = this.activeColliders;
+				var aabb;
+				var i;
+				var minx = null,
+					miny = null,
+					maxx = null,
+					maxy = null;
+
+				for (i in colliders)
+				{
+					aabb = colliders[i].globalAABB;
+					minx = minx ? Math.min(aabb.min.x, minx) : aabb.min.x;
+					miny = miny ? Math.min(aabb.min.y, miny) : aabb.min.y;
+					maxx = maxx ? Math.max(aabb.max.x, maxx) : aabb.max.x;
+					maxy = maxy ? Math.max(aabb.max.y, maxy) : aabb.max.y;
+				}
+
+				return {
+					min: {
+						x: minx,
+						y: miny
+					},
+					max: {
+						x: maxx,
+						y: maxy
+					}
+				};
+			}
+		});
 
 
         function GameObject(name, x, y)
@@ -68,14 +112,14 @@ define([
         GameObject.prototype.update = function(elapsed) {};
 
 
-        GameObject.prototype.collideFirst = function(x, y, types)
+        GameObject.prototype.collideFirst = function(x, y, types, sample)
         {
             if (!this.world || !this.enabled) return null;
 
             x = x || this._x;
             y = y || this._y;
             var selfColliders = this.activeColliders;
-            var allColliders = this.world.activeColliders;
+            var allColliders = sample ? sample : this.world.activeColliders;
             var tempX = this.x;
             var tempY = this.y;
             var i, j;
@@ -93,13 +137,66 @@ define([
                     if (!types || types.indexOf(allColliders[j].type) >= 0)
                     if (selfColliders[i].collidesWith(allColliders[j])) {
                         this.translateTo(tempX, tempY);
-                        return allColliders[j];
+                        return allColliders[j].parent;
                     }
                 }
             }
             this.translateTo(tempX, tempY);
             return null;
         };
+
+		GameObject.prototype.collide = function(x, y, types, sample)
+		{
+			if (!this.world || !this.enabled) return null;
+
+			x = x || this._x;
+			y = y || this._y;
+			var selfColliders = this.activeColliders;
+			var allColliders = sample ? sample : this.world.activeColliders;
+			var tempX = this.x;
+			var tempY = this.y;
+			var i, j;
+			var result = [];
+
+			this.translateTo(x, y);
+
+			if (types && typeof types != "array") types = [types];
+			else types = null;
+
+			for (i in selfColliders)
+			{
+				for (j in allColliders)
+				{
+					if (allColliders[j].parent != this)
+					if (!types || types.indexOf(allColliders[j].type) >= 0)
+					if (selfColliders[i].collidesWith(allColliders[j])) {
+						result.push(allColliders[j].parent);
+					}
+				}
+			}
+			this.translateTo(tempX, tempY);
+			return result;
+		};
+
+		/**
+		 * Called when the GameObject collides along the X axis during a moveBy call
+		 * Override to add logic
+		 * @param gameObject	{GameObject}	Collided GameObject
+		 * @returns 			{boolean}		Validate or invalidate the collision
+		 */
+		GameObject.prototype.moveCollideX = function(gameObject) {
+			return true;
+		};
+
+		/**
+		 * Called when the GameObject collides along the Y axis during a moveBy call
+		 * Override to add logic
+		 * @param gameObject	{GameObject}	Collided GameObject
+		 * @returns 			{boolean}		Validate or invalidate the collision
+		 */
+		GameObject.prototype.moveCollideY = function(gameObject) {
+			return true;
+		};
 
 
         /**** PRIVATE ****/

@@ -14,6 +14,24 @@ define([
 
         CircleCollider.prototype.radius = 0.0;
 
+		Object.defineProperty(CircleCollider.prototype, "globalAABB", {
+			get: function()
+			{
+				var t = this.globalTranslation;
+				var s = this.globalScale;
+				return {
+					min: {
+						x: Math.min(t.x + (this._x - this._radius) * s.x, t.x + (this._x + this._radius) * s.x),
+						y: Math.min(t.y + (this._y - this._radius) * s.y, t.y + (this._y + this._radius) * s.y)
+					},
+					max: {
+						x: Math.max(t.x + (this._x - this._radius) * s.x, t.x + (this._x + this._radius) * s.x),
+						y: Math.max(t.y + (this._y - this._radius) * s.y, t.y + (this._y + this._radius) * s.y)
+					}
+				};
+			}
+		});
+
         function CircleCollider(radius, x, y, type)
         {
             Collider.call(this, x, y, type);

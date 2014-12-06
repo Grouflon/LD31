@@ -25,6 +25,7 @@ define([
 			this.addChild(new AABBCollider(20, 40, -10, -40, "player"));
 
 			this._mover = new PlatformerMover();
+			this._mover.collideTypes = "solid";
 			this.addChild(this._mover);
 		}
 

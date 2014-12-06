@@ -33,6 +33,24 @@ define([
             };}
         });
 
+		Object.defineProperty(AABBCollider.prototype, "globalAABB", {
+			get: function()
+			{
+				var t = this.globalTranslation;
+				var s = this.globalScale;
+				return {
+					min: {
+						x: Math.min(t.x, t.x + this._width * s.x),
+						y: Math.min(t.y, t.y + this._height * s.y)
+					},
+					max: {
+						x: Math.max(t.x, t.x + this._width * s.x),
+						y: Math.max(t.y, t.y + this._height * s.y)
+					}
+				};
+			}
+		});
+
         function AABBCollider(width, height, x, y, type)
         {
             Collider.call(this, x, y, type);
