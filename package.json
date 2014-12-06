@@ -1,7 +1,7 @@
 {
-  "name": "playgroundjs-bootstrap",
+  "name": "LD31",
   "version": "0.0.0",
-  "description": "",
+  "description": "Entire game on one screen",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-requirejs": "~0.4.1",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:grouflon/playgroundjs-bootstrap.git"
+    "url": "git@github.com:Grouflon/LD31.git"
   },
   "author": "remi@uselessworks.com",
   "license": "BSD-2-Clause"
