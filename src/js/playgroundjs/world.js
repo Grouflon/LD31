@@ -113,6 +113,7 @@ define([
 
             var recDraw = function(node, m)
             {
+				if (typeof node.enabled !== "undefined" && !node.enabled) return;
                 if (node instanceof SpatialNode) m.multMatrix(node.transformMatrix);
                 if (node instanceof Graphic && node.visible)
                 {

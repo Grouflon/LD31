@@ -9,9 +9,11 @@ define([
 		"gameobjects/player",
 		"gameobjects/obstacle",
 		"gameobjects/trap",
-		"components/gamecontroller"
+		"components/gamecontroller",
+		"components/pausecontroller",
+		"events"
 	]
-	, function (World, Player, Obstacle, Trap, GameController)
+	, function (World, Player, Obstacle, Trap, GameController, PauseController, Events)
 	{
 		Level.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -21,6 +23,7 @@ define([
 			World.call(this, levelData.nodeName);
 			this._data = levelData;
 			this.addChild(new GameController);
+			this.addChild(new PauseController);
 		}
 
 		Level.prototype.begin = function()
@@ -31,6 +34,12 @@ define([
 		Level.prototype.update = function(elapsed)
 		{
 
+		};
+
+		Level.prototype.end = function(elapsed)
+		{
+			Events.sGameEnterPause.removeAll();
+			Events.sGameExitPause.removeAll();
 		};
 
 		/**** PRIVATE ****/

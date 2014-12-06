@@ -51,10 +51,15 @@ define([
 
 			this._cameraTracking = new CameraTracking();
 			this.addChild(this._cameraTracking);
+
+			this._boundOnEnterPause = Events.sGameEnterPause.add(this._onEnterPause.bind(this));
+			this._boundOnExitPause = Events.sGameExitPause.add(this._onExitPause.bind(this));
 		}
 
 		Player.prototype.update = function(elapsed)
 		{
+			if (this._paused) return;
+
 			if (Keyboard.check(Keys.LEFT) || Keyboard.check(Keys.A)) this._mover.moveLeft();
 			if (Keyboard.check(Keys.RIGHT) || Keyboard.check(Keys.D)) this._mover.moveRight();
 			if (Keyboard.pressed(Keys.UP) || Keyboard.pressed(Keys.W)) this._mover.jump();
@@ -77,14 +82,31 @@ define([
 
 		Player.prototype.destroyed = function()
 		{
+			Events.sGameEnterPause.remove(this._boundOnEnterPause._listener);
+			Events.sGameExitPause.remove(this._boundOnExitPause._listener);
 			Events.sPlayerDead.dispatch();
 		};
 
 		/**** PRIVATE ****/
+
+		Player.prototype._onEnterPause = function()
+		{
+			this._paused = true;
+		};
+
+		Player.prototype._onExitPause = function()
+		{
+			this._paused = false;
+		};
+
+		Player.prototype._paused = false;
 		Player.prototype._facing = 1;
 		Player.prototype._mover = null;
 		Player.prototype._repeater = null;
 		Player.prototype._cameraTracking = null;
+
+		Player.prototype._boundOnEnterPause = null;
+		Player.prototype._boundOnExitPause = null;
 
 		return Player;
 	});

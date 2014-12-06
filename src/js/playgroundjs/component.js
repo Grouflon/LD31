@@ -24,6 +24,7 @@ define([
         /** Override these functions for custom behavior **/
         Component.prototype.start = function() {};
         Component.prototype.update = function(elapsed) {};
+        Component.prototype.destroyed = function() {};
 
 
         /**** PRIVATE ****/
@@ -37,6 +38,13 @@ define([
             }
         };
 
+		Component.prototype._destroy = function()
+		{
+			this.parent = null;
+			this.destroyed();
+		};
+
+        Component.prototype._toDestroy = false;
         Component.prototype._started = false;
 
         return Component;

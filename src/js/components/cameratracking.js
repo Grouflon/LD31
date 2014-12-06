@@ -12,10 +12,10 @@ define([
 	{
 		CameraTracking.prototype = Object.create(Component.prototype);
 
+		/**** PUBLIC ****/
 		CameraTracking.prototype.acceleration = 0.15;
 		CameraTracking.prototype.offset = 60;
 
-		/**** PUBLIC ****/
 		function CameraTracking()
 		{
 			Component.call(this, "CameraTracking");

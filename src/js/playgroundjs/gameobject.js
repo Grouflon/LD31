@@ -181,7 +181,14 @@ define([
 
 		GameObject.prototype.destroy = function()
 		{
-			this._toDestroy = true;
+			var recDestroy = function(node) {
+				if (node instanceof Node)
+				{
+					for (var i in node._children) recDestroy(node._children[i]);
+				}
+				if (node && typeof node._toDestroy !== "undefined") node._toDestroy = true;
+			};
+			recDestroy(this);
 		};
 
         /**** PRIVATE ****/
