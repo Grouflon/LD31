@@ -5,12 +5,15 @@ if (typeof define !== 'function') {
  * Main
  * ===================================*/
 define([
-        "playgroundjs/game"
+        "playgroundjs/game",
+		"worlds/sandbox"
     ]
-	, function (Game)
+	, function (Game, Sandbox)
     {
         // Game Parameters
         var game = new Game("container", 800, 600, "#000");
         game.debug = true;
+
+		game.world = new Sandbox;
         game.start();
 	});

@@ -86,7 +86,7 @@ define([
                 this._lastFrameTime = Date.now();
                 this._elapsed = 0.0;
 
-                console.log('Game Started');
+                this._logInfo('Game Started');
                 this._loop();
             }
             else console.error("Unable to start game: game failed to initialize properly");
@@ -94,6 +94,15 @@ define([
 
 
         /**** PRIVATE ****/
+
+		Game.prototype._logInfo = function()
+		{
+			if (this.debug)
+			{
+				var args = Array.prototype.slice.call(arguments, 0);
+				console.log.apply(console, args);
+			}
+		};
 
         Game.prototype._switchWorld = function()
         {
@@ -103,11 +112,13 @@ define([
                 {
                     this._world.end();
                     this._world._game = null;
-                }
+					this._logInfo("Ended world \"" + this._world.name + "\"");
+				}
                 this._world = this._nextWorld;
                 this._nextWorld = null;
                 this._world.begin();
                 this._world._game = this;
+				this._logInfo("Started world \"" + this._world.name + "\"");
             }
         };
 
