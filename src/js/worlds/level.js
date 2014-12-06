@@ -8,9 +8,10 @@ define([
 		"playgroundjs/world",
 		"gameobjects/player",
 		"gameobjects/obstacle",
-		"gameobjects/trap"
+		"gameobjects/trap",
+		"components/gamecontroller"
 	]
-	, function (World, Player, Obstacle, Trap)
+	, function (World, Player, Obstacle, Trap, GameController)
 	{
 		Level.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -19,6 +20,7 @@ define([
 		{
 			World.call(this, levelData.nodeName);
 			this._data = levelData;
+			this.addChild(new GameController);
 		}
 
 		Level.prototype.begin = function()

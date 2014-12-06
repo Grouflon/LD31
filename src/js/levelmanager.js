@@ -5,16 +5,16 @@ if (typeof define !== 'function') {
  * Level Manager
  * ===================================*/
 define([
-		"playgroundjs/resources",
-		"worlds/level"
+		"playgroundjs/resources"
 	]
-	, function (Resources, Level)
+	, function (Resources)
 	{
 		return {
 
-			init: function(game)
+			init: function(game, Level)
 			{
 				this._game = game;
+				this._Level = Level;
 
 				for (var i in this._levels)
 				{
@@ -22,9 +22,14 @@ define([
 				}
 			},
 
+			restartLevel: function()
+			{
+				this.setLevel(this._currentLevel);
+			},
+
 			setLevel: function(index)
 			{
-				this._game.world = new Level(Resources.get ("level" + (index % this._levels.length)).value);
+				this._game.world = new this._Level(Resources.get ("level" + (index % this._levels.length)).value);
 			},
 
 			nextLevel: function()
@@ -34,10 +39,11 @@ define([
 
 			/**** PRIVATE ****/
 
+			_Level: null,
 			_levels: [
 				"data/maps/level0.oel"
 			],
 			_currentLevel: 0,
 			_game: null
-		}
+		};
 	});
