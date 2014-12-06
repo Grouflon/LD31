@@ -13,6 +13,8 @@ define([
 
         /**** PUBLIC ****/
 
+		Component.prototype.enabled = true;
+
         function Component(name)
         {
             BarrenNode.call(this, name);

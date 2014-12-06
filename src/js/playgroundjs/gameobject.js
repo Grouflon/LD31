@@ -38,7 +38,7 @@ define([
         Object.defineProperty(GameObject.prototype, "game", {
             get: function()
             {
-                if (!this.world) return this.world.game;
+                if (this.world) return this.world.game;
                 return null;
             }
         });

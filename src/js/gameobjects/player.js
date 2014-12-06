@@ -11,9 +11,10 @@ define([
 		"playgroundjs/input/keyboard",
 		"playgroundjs/utils/keys",
 		"components/platformermover",
-		"components/repeater"
+		"components/repeater",
+		"components/cameratracking"
 	]
-	, function (GameObject, Rectangle, AABBCollider, Keyboard, Keys, PlatformerMover, Repeater)
+	, function (GameObject, Rectangle, AABBCollider, Keyboard, Keys, PlatformerMover, Repeater, CameraTracking)
 	{
 		Player.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
@@ -40,7 +41,11 @@ define([
 			this.addChild(this._mover);
 
 			this._repeater = new Repeater(clonePattern);
+			this._repeater.enabled = false;
 			this.addChild(this._repeater);
+
+			this._cameraTracking = new CameraTracking();
+			this.addChild(this._cameraTracking);
 		}
 
 		Player.prototype.update = function(elapsed)
@@ -48,11 +53,19 @@ define([
 			if (Keyboard.check(Keys.LEFT) || Keyboard.check(Keys.A)) this._mover.moveLeft();
 			if (Keyboard.check(Keys.RIGHT) || Keyboard.check(Keys.D)) this._mover.moveRight();
 			if (Keyboard.pressed(Keys.UP) || Keyboard.pressed(Keys.W)) this._mover.jump();
+			if (Keyboard.pressed(Keys.SPACE)) this.togglePower();
+		};
+
+		Player.prototype.togglePower = function()
+		{
+			this._repeater.enabled = !this._repeater.enabled;
+			this._cameraTracking.enabled = !this._cameraTracking.enabled;
 		};
 
 		/**** PRIVATE ****/
 		Player.prototype._mover = null;
 		Player.prototype._repeater = null;
+		Player.prototype._cameraTracking = null;
 
 		return Player;
 	});

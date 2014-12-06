@@ -21,7 +21,7 @@ define([
 
 		Sandbox.prototype.begin = function()
 		{
-			var player = new Player(this.game.width / 2, this.game.height / 2 - 100);
+			var player = new Player(this.game.width / 2 - 200, this.game.height / 2 - 100);
 			this.addChild(player);
 
 			var o0 = new Obstacle(0, 400, 350, 20);
