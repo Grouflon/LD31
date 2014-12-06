@@ -8,18 +8,16 @@ define([
         "playgroundjs/game",
 		"playgroundjs/resources",
 		"worlds/sandbox",
-		"worlds/loading"
+		"worlds/loading",
+		"levelmanager"
     ]
-	, function (Game, Resources, Sandbox, Loading)
+	, function (Game, Resources, Sandbox, Loading, LevelManager)
     {
         // Game Parameters
         var game = new Game("container", 600, 600, "#333");
         game.debug = true;
-
-		/*var xml = Resources.loadXML("level0", "data/maps/level0.oel", function()
-		{
-			game.world = new Level(xml.value);
-		});*/
+		Resources.loadImage("tileset", "images/tileset.png");
+		LevelManager.init(game);
 
 		game.world = new Loading();
         game.start();

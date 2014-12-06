@@ -9,9 +9,9 @@ define([
 		"playgroundjs/resources",
 		"playgroundjs/graphics/rectangle",
 		"playgroundjs/graphics/text",
-		"worlds/level"
+		"levelmanager"
 	]
-	, function (World, Resources, Rectangle, Text, Level)
+	, function (World, Resources, Rectangle, Text, LevelManager)
 	{
 		Loading.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -28,30 +28,15 @@ define([
 			this._text.x = this.game.width / 2 - this._text.width / 2;
 			this._text.y = this.game.height / 2 - this._text.height / 2;
 			this.addChild(this._text);
-
-			Resources.loadXML("level", "data/maps/level0.oel", this._resourceLoaded.bind(this));
-			Resources.loadImage("tileset", "images/tileset.png", this._resourceLoaded.bind(this));
 		};
 
 		Loading.prototype.update = function(elapsed)
 		{
-
+			if (Resources.allResourcesLoaded) LevelManager.setLevel(0);
 		};
 
 		/**** PRIVATE ****/
-
-		Loading.prototype._resourceLoaded = function()
-		{
-			this._loadedResourcesCount++;
-			if (this._loadedResourcesCount == Loading.prototype._totalResourcesCount)
-			{
-				this.game.world = new Level(Resources.get("level").value);
-			}
-		};
-
 		Loading.prototype._text = null;
-		Loading.prototype._totalResourcesCount = 2;
-		Loading.prototype._loadedResourcesCount = 0;
 
 		return Loading;
 	});

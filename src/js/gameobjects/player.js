@@ -12,9 +12,10 @@ define([
 		"playgroundjs/utils/keys",
 		"components/platformermover",
 		"components/repeater",
-		"components/cameratracking"
+		"components/cameratracking",
+		"events"
 	]
-	, function (GameObject, Rectangle, AABBCollider, Keyboard, Keys, PlatformerMover, Repeater, CameraTracking)
+	, function (GameObject, Rectangle, AABBCollider, Keyboard, Keys, PlatformerMover, Repeater, CameraTracking, Events)
 	{
 		Player.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
@@ -72,6 +73,11 @@ define([
 		{
 			this._repeater.enabled = !this._repeater.enabled;
 			this._cameraTracking.enabled = !this._cameraTracking.enabled;
+		};
+
+		Player.prototype.destroyed = function()
+		{
+			Events.sPlayerDead.dispatch();
 		};
 
 		/**** PRIVATE ****/

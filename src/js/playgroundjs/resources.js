@@ -12,6 +12,14 @@ define([
         var Resources = {};
 
         /**** STATIC ****/
+
+		Object.defineProperty(Resources, "allResourcesLoaded", {
+			get: function() {
+				for (var i in this._resources) { if (!this._resources[i].loaded) return false; }
+				return true
+			}
+		});
+
         Resources.loadImage = function(name, path, callback)
         {
             return this._load(Resource.types.IMAGE, name, path, callback);
@@ -44,7 +52,7 @@ define([
         Resources._load = function(type, name, path, callback)
         {
             var res = new Resource(type, name, path);
-            res.sLoaded.addOnce(callback);
+            if (callback) res.sLoaded.addOnce(callback);
             this._resources[name] = res;
             return res;
         };
