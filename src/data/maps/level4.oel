@@ -1,4 +1,4 @@
-<level width="1008" height="1260">
+<level width="1008" height="1260" power="True">
   <terrain tileset="terrain" exportMode="XMLCoords">
     <tile x="0" y="0" tx="7" ty="0" />
     <tile x="0" y="1" tx="7" ty="0" />
@@ -444,5 +444,7 @@
   <entities>
     <spawn id="1" x="216" y="1080" />
     <exit id="0" x="180" y="216" />
+    <speech id="2" x="216" y="108" width="108" height="180" value="Will you stop throwing&#xD;&#xA;me off cliffs&#xD;&#xA;PLEASE?" />
+    <speech id="3" x="288" y="612" width="288" height="108" value="This architecture does&#xD;&#xA;not make any freaking&#xD;&#xA;sense." />
   </entities>
 </level>

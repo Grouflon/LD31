@@ -326,6 +326,6 @@
     <speech id="4" x="432" y="324" width="36" height="180" value="Where the f***&#xD;&#xA;am I ?!" />
     <speech id="5" x="684" y="324" width="144" height="180" value="Move me around&#xD;&#xA;with A, D, Left or Right,&#xD;&#xA;and make me jump&#xD;&#xA;with Up or W&#xD;&#xA;will you?" />
     <exit id="6" x="1116" y="216" />
-    <speech id="2" x="972" y="180" width="108" height="108" value="Let's get&#xD;&#xA;out of here" />
+    <speech id="2" x="972" y="180" width="108" height="108" value="I'm out of here." />
   </entities>
 </level>

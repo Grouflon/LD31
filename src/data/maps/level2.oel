@@ -1,4 +1,4 @@
-<level width="1584" height="612">
+<level width="1584" height="612" power="True">
   <terrain tileset="terrain" exportMode="XMLCoords">
     <tile x="0" y="0" tx="7" ty="0" />
     <tile x="0" y="1" tx="7" ty="0" />
@@ -365,5 +365,7 @@
   <entities>
     <spawn id="2" x="180" y="396" />
     <exit id="1" x="1152" y="432" />
+    <speech id="0" x="396" y="360" width="108" height="144" value="Nah, I can't get&#xD;&#xA;through walls,&#xD;&#xA;sorry..." />
+    <speech id="3" x="648" y="360" width="180" height="144" value="Ho, as a matter&#xD;&#xA;of fact, I can!&#xD;&#xA;Nevermind." />
   </entities>
 </level>
