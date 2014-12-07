@@ -15,14 +15,14 @@ define([
 		Obstacle.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
 
-		function Obstacle(x, y)
+		function Obstacle(x, y, type)
 		{
 			GameObject.call(this, "Obstacle", x, y);
 
-			var sprite = new Sprite(Resources.get("tileset").value, 32, 32);
-			sprite.setFrame(0);
+			var sprite = new Sprite(Resources.get("tileset").value, 36, 36);
+			sprite.setFrame(type);
 			this.addChild(sprite);
-			this.addChild(new AABBCollider(32, 32, 0, 0, "solid"));
+			this.addChild(new AABBCollider(36, 36, 0, 0, "solid"));
 		}
 
 		return Obstacle;

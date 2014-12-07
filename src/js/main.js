@@ -15,10 +15,11 @@ define([
 	, function (Game, Resources, Sandbox, Loading, LevelManager, Level)
     {
         // Game Parameters
-        var game = new Game("container", 600, 600, "#333");
+        var game = new Game("container", 600, 600, "#501c41");
         game.debug = true;
 		Resources.loadImage("tileset", "images/tileset.png");
 		Resources.loadImage("bot_sprite", "images/bot_sprite.png");
+		Resources.loadImage("door", "images/door.png");
 		LevelManager.init(game, Level);
 
 		game.world = new Loading();

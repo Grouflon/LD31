@@ -6,10 +6,12 @@ if (typeof define !== 'function') {
  * ===================================*/
 define([
 		"playgroundjs/gameobject",
+		"playgroundjs/graphics/image",
 		"playgroundjs/graphics/rectangle",
-		"playgroundjs/colliders/aabbcollider"
+		"playgroundjs/colliders/aabbcollider",
+		"playgroundjs/resources"
 	]
-	, function (GameObject, Rectangle, AABBCollider)
+	, function (GameObject, Image, Rectangle, AABBCollider, Resources)
 	{
 		Obstacle.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
@@ -18,8 +20,8 @@ define([
 		{
 			GameObject.call(this, "Obstacle", x, y);
 
-			this.addChild(new Rectangle(32, 64, "#0ff", -16, 0));
-			this.addChild(new AABBCollider(32, 64, -16, 0, "exit"));
+			this.addChild(new Image(Resources.get("door").value, -66, 12));
+			this.addChild(new AABBCollider(30, 60, -30, 12, "exit"));
 		}
 
 		return Obstacle;

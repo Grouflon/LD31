@@ -87,11 +87,11 @@ define([
 			for (var i in node.childNodes)
 			{
 				tile = node.childNodes[i];
-				if (tile.tx == 0 && tile.ty == 0)
+				if (tile.ty == 0)
 				{
-					this.addChild(new Obstacle(this._tileSize * tile.x, this._tileSize * tile.y, this._tileSize, this._tileSize));
+					this.addChild(new Obstacle(this._tileSize * tile.x, this._tileSize * tile.y, tile.tx));
 				}
-				else if (tile.tx == 1 && tile.ty == 0)
+				else if (tile.ty == 1)
 				{
 					this.addChild(new Trap(this._tileSize * tile.x, this._tileSize * tile.y, this._tileSize, this._tileSize));
 				}
@@ -129,7 +129,7 @@ define([
 		Level.prototype._levelHeight = 0;
 		Level.prototype._data = null;
 		//Level.prototype._player = null;
-		Level.prototype._tileSize = 32;
+		Level.prototype._tileSize = 36;
 
 		return Level;
 	});

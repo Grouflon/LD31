@@ -5,16 +5,16 @@
   <BackgroundColor A="255" R="192" G="192" B="192" />
   <GridColor A="255" R="255" G="240" B="90" />
   <LevelDefaultSize>
-    <Width>1280</Width>
-    <Height>800</Height>
+    <Width>1440</Width>
+    <Height>900</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
-    <Width>32</Width>
-    <Height>32</Height>
+    <Width>36</Width>
+    <Height>36</Height>
   </LevelMinimumSize>
   <LevelMaximumSize>
-    <Width>6400</Width>
-    <Height>6400</Height>
+    <Width>7200</Width>
+    <Height>7200</Height>
   </LevelMaximumSize>
   <Filename>C:\TAF\GAMEDEV\PERSO\LD31\src\data\maps\ld31_ogmo.oep</Filename>
   <AngleMode>Degrees</AngleMode>
@@ -29,8 +29,8 @@
     <LayerDefinition xsi:type="TileLayerDefinition">
       <Name>terrain</Name>
       <Grid>
-        <Width>32</Width>
-        <Height>32</Height>
+        <Width>36</Width>
+        <Height>36</Height>
       </Grid>
       <ScrollFactor>
         <X>1</X>
@@ -41,8 +41,8 @@
     <LayerDefinition xsi:type="EntityLayerDefinition">
       <Name>entities</Name>
       <Grid>
-        <Width>32</Width>
-        <Height>32</Height>
+        <Width>36</Width>
+        <Height>36</Height>
       </Grid>
       <ScrollFactor>
         <X>1</X>
@@ -55,8 +55,8 @@
       <Name>terrain</Name>
       <FilePath>..\..\images\tileset.png</FilePath>
       <TileSize>
-        <Width>32</Width>
-        <Height>32</Height>
+        <Width>36</Width>
+        <Height>36</Height>
       </TileSize>
       <TileSep>0</TileSep>
     </Tileset>
@@ -64,12 +64,12 @@
   <EntityDefinitions>
     <EntityDefinition Name="spawn" Limit="1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
       <Size>
-        <Width>32</Width>
-        <Height>32</Height>
+        <Width>36</Width>
+        <Height>36</Height>
       </Size>
       <Origin>
-        <X>16</X>
-        <Y>-32</Y>
+        <X>18</X>
+        <Y>-36</Y>
       </Origin>
       <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
@@ -79,12 +79,12 @@
     </EntityDefinition>
     <EntityDefinition Name="exit" Limit="1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
       <Size>
-        <Width>32</Width>
-        <Height>32</Height>
+        <Width>36</Width>
+        <Height>36</Height>
       </Size>
       <Origin>
-        <X>16</X>
-        <Y>-32</Y>
+        <X>18</X>
+        <Y>-36</Y>
       </Origin>
       <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
         <RectColor A="255" R="0" G="255" B="0" />

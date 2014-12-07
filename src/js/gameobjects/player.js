@@ -43,6 +43,7 @@ define([
 				elements[0].addAnim("walkRight", [4, 5, 6, 7], 10, true);
 				elements[0].addAnim("idleLeft", [8, 9, 10, 11], 10, true);
 				elements[0].addAnim("walkLeft", [12, 13, 14, 15], 10, true);
+				elements[0].layer = 5;
 
 				target.addChild(elements[0]);
 				target.addChild(elements[1]);
