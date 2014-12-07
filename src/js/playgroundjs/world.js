@@ -22,6 +22,10 @@ define([
 
         World.prototype.enabled = true;
 
+		Object.defineProperty(World.prototype, "world", {
+			get: function () { return this; }
+		});
+
         Object.defineProperty(World.prototype, "game", {
             get: function () { return this._game; }
         });
@@ -55,6 +59,21 @@ define([
                 return colliders;
             }
         });
+
+		Object.defineProperty(World.prototype, "colliders", {
+			get : function() {
+				var colliders = [];
+				var f = function(node)
+				{
+					if (node instanceof Collider) colliders.push(node);
+					if (node instanceof Node) {
+						for (var i in node._children) f(node._children[i]);
+					}
+				};
+				f(this);
+				return colliders;
+			}
+		});
 
 
         function World(name) {

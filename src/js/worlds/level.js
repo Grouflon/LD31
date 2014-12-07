@@ -12,9 +12,10 @@ define([
 		"gameobjects/exit",
 		"components/gamecontroller",
 		"components/pausecontroller",
+		"components/terraincollisionclamper",
 		"events"
 	]
-	, function (World, Player, Obstacle, Trap, Exit, GameController, PauseController, Events)
+	, function (World, Player, Obstacle, Trap, Exit, GameController, PauseController, TerrainCollisionClamper, Events)
 	{
 		Level.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -33,6 +34,7 @@ define([
 			this._data = levelData;
 			this.addChild(new GameController);
 			this.addChild(new PauseController);
+			this.addChild(new TerrainCollisionClamper);
 		}
 
 		Level.prototype.begin = function()
