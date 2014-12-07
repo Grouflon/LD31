@@ -32,7 +32,7 @@ define([
 
 		Loading.prototype.update = function(elapsed)
 		{
-			if (Resources.allResourcesLoaded) LevelManager.setLevel(0);
+			if (Resources.allResourcesLoaded) LevelManager.setLevel(LevelManager._currentLevel);
 		};
 
 		/**** PRIVATE ****/

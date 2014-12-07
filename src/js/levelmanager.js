@@ -30,6 +30,7 @@ define([
 			setLevel: function(index)
 			{
 				this._game.world = new this._Level(Resources.get ("level" + (index % this._levels.length)).value);
+				this._currentLevel = index;
 			},
 
 			nextLevel: function()
@@ -42,7 +43,10 @@ define([
 			_Level: null,
 			_levels: [
 				"data/maps/level0.oel",
-				"data/maps/level1.oel"
+				"data/maps/level1.oel",
+				"data/maps/level2.oel",
+				"data/maps/level3.oel",
+				"data/maps/level4.oel"
 			],
 			_currentLevel: 0,
 			_game: null
