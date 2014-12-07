@@ -18,6 +18,14 @@ define([
 		Level.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
 
+		Object.defineProperty(Level.prototype, "levelWidth", {
+			get: function() { return this._levelWidth; }
+		});
+
+		Object.defineProperty(Level.prototype, "levelHeight", {
+			get: function() { return this._levelHeight; }
+		});
+
 		function Level(levelData)
 		{
 			World.call(this, levelData.nodeName);
@@ -46,6 +54,9 @@ define([
 
 		Level.prototype._generateLevel = function(node)
 		{
+			this._levelWidth = node.width;
+			this._levelHeight = node.height;
+
 			for (var i in node.childNodes)
 			{
 				switch (node.childNodes[i].nodeName)
@@ -104,6 +115,8 @@ define([
 			}
 		};
 
+		Level.prototype._levelWidth = 0;
+		Level.prototype._levelHeight = 0;
 		Level.prototype._data = null;
 		//Level.prototype._player = null;
 		Level.prototype._tileSize = 32;
