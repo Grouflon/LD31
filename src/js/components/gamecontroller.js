@@ -18,6 +18,7 @@ define([
 		{
 			Component.call(this, "GameController");
 			Events.sPlayerDead.addOnce(this._onPlayerDead.bind(this));
+			Events.sPlayerExit.addOnce(this._onPlayerExit.bind(this));
 			Events.sGameEnterPause.add(this._onEnterPause.bind(this));
 			Events.sGameExitPause.add(this._onExitPause.bind(this));
 		}
@@ -47,6 +48,11 @@ define([
 		GameController.prototype._onPlayerDead = function()
 		{
 			LevelManager.restartLevel();
+		};
+
+		GameController.prototype._onPlayerExit = function()
+		{
+			LevelManager.nextLevel();
 		};
 
 

@@ -9,11 +9,12 @@ define([
 		"gameobjects/player",
 		"gameobjects/obstacle",
 		"gameobjects/trap",
+		"gameobjects/exit",
 		"components/gamecontroller",
 		"components/pausecontroller",
 		"events"
 	]
-	, function (World, Player, Obstacle, Trap, GameController, PauseController, Events)
+	, function (World, Player, Obstacle, Trap, Exit, GameController, PauseController, Events)
 	{
 		Level.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -107,6 +108,13 @@ define([
 					{
 						//this._player = new Player(parseFloat(entity.x), parseFloat(entity.y));
 						this.addChild(new Player(parseFloat(entity.x), parseFloat(entity.y)));
+						break;
+					}
+
+					case "exit":
+					{
+						//this._player = new Player(parseFloat(entity.x), parseFloat(entity.y));
+						this.addChild(new Exit(parseFloat(entity.x), parseFloat(entity.y)));
 						break;
 					}
 

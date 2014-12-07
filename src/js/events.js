@@ -11,6 +11,7 @@ define([
 	{
 		return {
 			sPlayerDead: new Signal,
+			sPlayerExit: new Signal,
 			sGameEnterPause: new Signal,
 			sGameExitPause: new Signal
 		}

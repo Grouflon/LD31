@@ -23,7 +23,15 @@ define([
 
 		CameraTracking.prototype.start = function()
 		{
-			this.parent.world.setCamera(this._parent.x - this.parent.game.width / 2, this._parent.y - this.parent.game.height / 2);
+			var levelWidth = this.parent.world.levelWidth;
+			var levelHeight = this.parent.world.levelHeight;
+			var viewportWidth = this.parent.game.width;
+			var viewportHeight = this.parent.game.height;
+
+			var camera = new Vector2(this._parent.x - this.parent.game.width / 2, this._parent.y - this.parent.game.height / 2);
+			camera.x = Math.min(Math.max(camera.x, 0), levelWidth - viewportWidth);
+			camera.y = Math.min(Math.max(camera.y, 0), levelHeight - viewportHeight);
+			this.parent.world.setCamera(camera.x, camera.y);
 		};
 
 		CameraTracking.prototype.update = function(elapsed)

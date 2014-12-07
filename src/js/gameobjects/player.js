@@ -68,10 +68,8 @@ define([
 			if (this._mover._velocity.x > 0) this._facing = 1;
 			else if (this._mover._velocity.x < 0) this._facing = -1;
 
-			if (this.collideFirst(this.x, this.y, "trap"))
-			{
-				this.destroy();
-			}
+			if (this.collideFirst(this.x, this.y, "trap")) { this.die(); }
+			if (this.collideFirst(this.x, this.y, "exit")) { this.exit(); }
 		};
 
 		Player.prototype.togglePower = function()
@@ -80,11 +78,22 @@ define([
 			this._cameraTracking.enabled = !this._cameraTracking.enabled;
 		};
 
+		Player.prototype.die = function()
+		{
+			Events.sPlayerDead.dispatch();
+			this.destroy();
+		};
+
 		Player.prototype.destroyed = function()
 		{
 			Events.sGameEnterPause.remove(this._boundOnEnterPause._listener);
 			Events.sGameExitPause.remove(this._boundOnExitPause._listener);
-			Events.sPlayerDead.dispatch();
+		};
+
+		Player.prototype.exit = function()
+		{
+			Events.sPlayerExit.dispatch();
+			this.destroy();
 		};
 
 		/**** PRIVATE ****/
