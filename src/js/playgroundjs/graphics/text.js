@@ -23,8 +23,11 @@ define([
             get : function() { return this._text; },
             set : function(value)
             {
-                this._text = value;
-                this._preRender();
+				if (value != this._text)
+				{
+					this._text = value;
+					this._preRender();
+				}
             }
         });
 
@@ -46,6 +49,15 @@ define([
             }
         });
 
+		Object.defineProperty(Text.prototype, "lineHeight", {
+			get : function() { return this._size; },
+			set : function(value)
+			{
+				this._size = value;
+				this._preRender();
+			}
+		});
+
 
         function Text(text, color, x, y) {
             Graphic.call(this, "Text", x, y, color);
@@ -58,20 +70,30 @@ define([
 
         Text.prototype._preRender = function()
         {
-            this._ctx.font = this._size + "px " + this._font;
-            var measure = this._ctx.measureText(this._text);
-            this._canvas.height = this._size;
-            this._canvas.width = measure.width;
+			var lines = this._text.split("\n");
+			var i;
+			this._canvas.width = 0;
+			this._ctx.font = this._size + "px " + this._font;
+			var measure;
+			for (i in lines)
+			{
+				measure = this._ctx.measureText(lines[i]);
+				this._canvas.width = Math.max(measure.width, this._canvas.width);
+			}
+            this._canvas.height = Math.max(this._size, this._lineHeight * lines.length);
 
-            this._ctx.fillStyle = this.color;
             this._ctx.font = this._size + "px " + this._font;
             this._ctx.textBaseline = "top";
             this._ctx.fillStyle = this.color;
-            this._ctx.fillText(this._text, 0, 0);
+			for (i in lines)
+			{
+				this._ctx.fillText(lines[i], 0, i * this._lineHeight);
+			}
         };
 
         Text.prototype._text = null;
         Text.prototype._size = 23;
+        Text.prototype._lineHeight = 26;
         Text.prototype._font = "munro";
 
         return Text;
