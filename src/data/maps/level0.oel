@@ -355,6 +355,6 @@
   </terrain>
   <entities>
     <exit id="0" x="928" y="416" />
-    <spawn id="2" x="160" y="576" />
+    <spawn id="1" x="256" y="416" />
   </entities>
 </level>

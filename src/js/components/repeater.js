@@ -43,10 +43,10 @@ define([
 			var selfAABB = this.parent.collisionGlobalAABB;
 			var i;
 
-			/*camAABB.min.x += 100;
-			camAABB.min.y += 100;
-			camAABB.max.x -= 100;
-			camAABB.max.y -= 100;*/
+			/*camAABB.min.x += 16;
+			camAABB.min.y += 16;
+			camAABB.max.x -= 16;
+			camAABB.max.y -= 16;*/
 
 			// TOP OUT
 			if ((selfAABB.min.y < camAABB.min.y) && (selfAABB.max.y > camAABB.min.y))

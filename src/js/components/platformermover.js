@@ -32,7 +32,6 @@ define([
 		PlatformerMover.prototype.update = function(elapsed)
 		{
 			this._computeVelocity(elapsed);
-			this._onGround = false;
 			this._moveCollide(elapsed);
 			this._resetInput();
 		};
@@ -52,39 +51,40 @@ define([
 
 		PlatformerMover.prototype._moveCollide = function(elapsed)
 		{
-			var xDiff = this._velocity.x * elapsed;
-			var yDiff = this._velocity.y * elapsed;
-			var x = this._parent.x + xDiff;
-			var y = this._parent.y + yDiff;
-			var AABB = this.parent.collisionGlobalAABB;
-			AABB.min.x += xDiff;
-			AABB.min.y += yDiff;
-			AABB.max.x += xDiff;
-			AABB.max.y += yDiff;
+			var rawXDiff = this._velocity.x * elapsed + this._deltaX;
+			var rawYDiff = this._velocity.y * elapsed + this._deltaY;
+			var xDiff = Math.floor(rawXDiff);
+			var yDiff = Math.floor(rawYDiff);
+			this._deltaX = rawXDiff - xDiff;
+			this._deltaY = rawYDiff - yDiff;
+
+			var dirX = MathFunctions.sign(xDiff);
+			var dirY = MathFunctions.sign(yDiff);
+			var startX = this._parent.x;
+			var startY = this._parent.y;
+			var endX = startX + xDiff;
+			var endY = startY + yDiff;
 
 			var collisionX = false;
 			var collisionY = false;
 
-			var collision;
-			var collisionAABB;
-
-			while (collision = this.parent.collideFirst(x, null, this.collideTypes))
+			while (dirX != 0 && this.parent.collideFirst(endX, null, this.collideTypes))
 			{
-				collisionAABB = collision.collisionGlobalAABB;
-				x += xDiff >= 0 ? collisionAABB.min.x - AABB.max.x : collisionAABB.max.x - AABB.min.x;
+				endX -= dirX;
 				collisionX = true;
 			}
-			if (collisionX) this._collideX(MathFunctions.sign(xDiff));
-			this.parent.translateTo(x, this.parent.y);
+			if (collisionX) this._collideX(dirX);
+			this.parent.translateTo(endX, this.parent.y);
 
-			while (collision = this.parent.collideFirst(null, y, this.collideTypes))
+			while (dirY != 0 && this.parent.collideFirst(null, endY, this.collideTypes))
 			{
-				collisionAABB = collision.collisionGlobalAABB;
-				y += yDiff >= 0 ? collisionAABB.min.y - AABB.max.y : collisionAABB.max.y - AABB.min.y;
+				endY -= dirY;
 				collisionY = true;
 			}
-			if (collisionY) this._collideY(MathFunctions.sign(yDiff));
-			this.parent.translateTo(this.parent.x, y);
+			if (collisionY) this._collideY(dirY);
+			this.parent.translateTo(this.parent.x, endY);
+
+			//this.parent._repeater.update(elapsed);
 		};
 
 		PlatformerMover.prototype._collideX = function(direction)
@@ -100,7 +100,7 @@ define([
 
 		PlatformerMover.prototype._computeVelocity = function(elapsed)
 		{
-			//	CALCULATING DESIRED VELOCITY
+			//	CALCULATING DESIRED VELOCITYa
 			var desiredVelocity = new Vector2;
 			if (this._left) desiredVelocity.x -= 1.0;
 			if (this._right) desiredVelocity.x += 1.0;
@@ -118,10 +118,16 @@ define([
 			if (Math.abs(this._velocity.x) <= this.stopThreshold) this._velocity.x = 0.0;
 
 			// RESOLVING Y
-			if (this._jump && this._onGround) this._velocity.y -= this.jumpImpulse;
+			if (this._jump && this._onGround)
+			{
+				this._velocity.y -= this.jumpImpulse;
+				this._onGround = false;
+			}
 			this._velocity.y += this.gravity * elapsed;
 		};
 
+		PlatformerMover.prototype._deltaX = 0.0;
+		PlatformerMover.prototype._deltaY = 0.0;
 		PlatformerMover.prototype._left = false;
 		PlatformerMover.prototype._right = false;
 		PlatformerMover.prototype._jump = false;
