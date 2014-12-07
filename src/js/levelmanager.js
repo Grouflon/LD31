@@ -48,7 +48,7 @@ define([
 				"data/maps/level3.oel",
 				"data/maps/level4.oel"
 			],
-			_currentLevel: 4,
+			_currentLevel: 1,
 			_game: null
 		};
 	});

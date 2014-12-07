@@ -15,9 +15,10 @@ define([
 		"components/platformermover",
 		"components/repeater",
 		"components/cameratracking",
+		"gameobjects/flash",
 		"events"
 	]
-	, function (GameObject, Sprite, Text, AABBCollider, Keyboard, Keys, Resources, PlatformerMover, Repeater, CameraTracking, Events)
+	, function (GameObject, Sprite, Text, AABBCollider, Keyboard, Keys, Resources, PlatformerMover, Repeater, CameraTracking, Flash, Events)
 	{
 		Player.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
@@ -111,6 +112,7 @@ define([
 			{
 				this._repeater.enabled = !this._repeater.enabled;
 				this._cameraTracking.enabled = !this._cameraTracking.enabled;
+				this.world.addChild(new Flash);
 			}
 		};
 

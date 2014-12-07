@@ -59,7 +59,6 @@ define([
 			{
 				node._parent = null;
 				node._sParentChanged.dispatch();
-				this._children.splice(this._children.indexOf(node), 1);
 			}
 			else console.error(this.name + ": cannot remove as a child an object that is not a node.");
 		};
@@ -76,6 +75,18 @@ define([
             }
             return false;
         };
+
+		Node.prototype.indexOf = function(node)
+		{
+			if (node instanceof BarrenNode)
+			{
+				for(var i in this._children)
+				{
+					if (this._children[i] == node) return i;
+				}
+			}
+			return -1;
+		};
 
 
         Node.prototype.isDeepChild = function(node)
