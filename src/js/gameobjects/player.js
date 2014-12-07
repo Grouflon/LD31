@@ -6,16 +6,17 @@ if (typeof define !== 'function') {
  * ===================================*/
 define([
 		"playgroundjs/gameobject",
-		"playgroundjs/graphics/rectangle",
+		"playgroundjs/graphics/sprite",
 		"playgroundjs/colliders/aabbcollider",
 		"playgroundjs/input/keyboard",
 		"playgroundjs/utils/keys",
+		"playgroundjs/resources",
 		"components/platformermover",
 		"components/repeater",
 		"components/cameratracking",
 		"events"
 	]
-	, function (GameObject, Rectangle, AABBCollider, Keyboard, Keys, PlatformerMover, Repeater, CameraTracking, Events)
+	, function (GameObject, Sprite, AABBCollider, Keyboard, Keys, Resources, PlatformerMover, Repeater, CameraTracking, Events)
 	{
 		Player.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
@@ -28,24 +29,33 @@ define([
 		{
 			GameObject.call(this, "Player", x, y);
 
+			this._sprites = [];
+
 			var clonePattern = function(x, y, target)
 			{
 				var elements = [
-					new Rectangle(20, 40, "#fff", x - 10, y - 40),
-					new AABBCollider(20, 40, x - 10, y - 40, "player")
+					new Sprite(Resources.get("bot_sprite").value , 33, 48, x - 16, y - 48),
+					new AABBCollider(28, 48, x - 14, y - 48, "player")
 				];
+
+				this._sprites.push(elements[0]);
+				elements[0].addAnim("idleRight", [0, 1, 2, 3], 10, true);
+				elements[0].addAnim("walkRight", [4, 5, 6, 7], 10, true);
+				elements[0].addAnim("idleLeft", [8, 9, 10, 11], 10, true);
+				elements[0].addAnim("walkLeft", [12, 13, 14, 15], 10, true);
+
 				target.addChild(elements[0]);
 				target.addChild(elements[1]);
 				return elements;
 			};
 
-			clonePattern(0, 0, this);
+			clonePattern.bind(this)(0, 0, this);
 
 			this._mover = new PlatformerMover();
 			this._mover.collideTypes = "solid";
 			this.addChild(this._mover);
 
-			this._repeater = new Repeater(clonePattern);
+			this._repeater = new Repeater(clonePattern.bind(this));
 			this._repeater.enabled = false;
 			this.addChild(this._repeater);
 
@@ -55,6 +65,11 @@ define([
 			this._boundOnEnterPause = Events.sGameEnterPause.add(this._onEnterPause.bind(this));
 			this._boundOnExitPause = Events.sGameExitPause.add(this._onExitPause.bind(this));
 		}
+
+		Player.prototype.start = function()
+		{
+			this._spritesPlayAnim("idle");
+		};
 
 		Player.prototype.update = function(elapsed)
 		{
@@ -67,6 +82,10 @@ define([
 
 			if (this._mover._velocity.x > 0) this._facing = 1;
 			else if (this._mover._velocity.x < 0) this._facing = -1;
+
+			var side = this._facing == 1 ? "Right" : "Left"
+			if (this._mover._velocity.x == 0) this._spritesPlayAnim("idle" + side);
+			else this._spritesPlayAnim("walk" + side);
 
 			if (this.collideFirst(this.x, this.y, "trap")) { this.die(); }
 			if (this.collideFirst(this.x, this.y, "exit")) { this.exit(); }
@@ -108,6 +127,15 @@ define([
 			this._paused = false;
 		};
 
+		Player.prototype._spritesPlayAnim = function(name)
+		{
+			for (var i in this._sprites)
+			{
+				this._sprites[i].play(name);
+			}
+		};
+
+		Player.prototype._sprites = null;
 		Player.prototype._paused = false;
 		Player.prototype._facing = 1;
 		Player.prototype._mover = null;

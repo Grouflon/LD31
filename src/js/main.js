@@ -18,6 +18,7 @@ define([
         var game = new Game("container", 600, 600, "#333");
         game.debug = true;
 		Resources.loadImage("tileset", "images/tileset.png");
+		Resources.loadImage("bot_sprite", "images/bot_sprite.png");
 		LevelManager.init(game, Level);
 
 		game.world = new Loading();
