@@ -73,13 +73,14 @@ define([
 			var lines = this._text.split("\n");
 			var i;
 			this._canvas.width = 0;
-			this._ctx.font = this._size + "px " + this._font;
 			var measure;
 			for (i in lines)
 			{
+				this._ctx.font = this._size + "px " + this._font;
 				measure = this._ctx.measureText(lines[i]);
 				this._canvas.width = Math.max(measure.width, this._canvas.width);
 			}
+
             this._canvas.height = Math.max(this._size, this._lineHeight * lines.length);
 
             this._ctx.font = this._size + "px " + this._font;

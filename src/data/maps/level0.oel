@@ -1,4 +1,4 @@
-<level width="1260" height="612">
+<level width="1260" height="612" power="False">
   <terrain tileset="terrain" exportMode="XMLCoords">
     <tile x="0" y="0" tx="7" ty="0" />
     <tile x="0" y="1" tx="7" ty="0" />
@@ -78,50 +78,36 @@
     <tile x="7" y="0" tx="7" ty="0" />
     <tile x="7" y="1" tx="7" ty="0" />
     <tile x="7" y="2" tx="7" ty="0" />
-    <tile x="7" y="12" tx="3" ty="0" />
-    <tile x="7" y="13" tx="2" ty="0" />
     <tile x="7" y="14" tx="0" ty="0" />
     <tile x="7" y="15" tx="1" ty="0" />
     <tile x="7" y="16" tx="1" ty="0" />
     <tile x="8" y="0" tx="7" ty="0" />
     <tile x="8" y="1" tx="7" ty="0" />
     <tile x="8" y="2" tx="7" ty="0" />
-    <tile x="8" y="11" tx="3" ty="0" />
-    <tile x="8" y="12" tx="2" ty="0" />
-    <tile x="8" y="13" tx="2" ty="0" />
     <tile x="8" y="14" tx="0" ty="0" />
     <tile x="8" y="15" tx="1" ty="0" />
     <tile x="8" y="16" tx="1" ty="0" />
     <tile x="9" y="0" tx="7" ty="0" />
     <tile x="9" y="1" tx="7" ty="0" />
     <tile x="9" y="2" tx="7" ty="0" />
-    <tile x="9" y="11" tx="3" ty="0" />
-    <tile x="9" y="12" tx="2" ty="0" />
-    <tile x="9" y="13" tx="2" ty="0" />
     <tile x="9" y="14" tx="0" ty="0" />
     <tile x="9" y="15" tx="1" ty="0" />
     <tile x="9" y="16" tx="1" ty="0" />
     <tile x="10" y="0" tx="7" ty="0" />
     <tile x="10" y="1" tx="7" ty="0" />
     <tile x="10" y="2" tx="7" ty="0" />
-    <tile x="10" y="12" tx="3" ty="0" />
-    <tile x="10" y="13" tx="2" ty="0" />
     <tile x="10" y="14" tx="0" ty="0" />
     <tile x="10" y="15" tx="1" ty="0" />
     <tile x="10" y="16" tx="1" ty="0" />
     <tile x="11" y="0" tx="7" ty="0" />
     <tile x="11" y="1" tx="7" ty="0" />
     <tile x="11" y="2" tx="7" ty="0" />
-    <tile x="11" y="12" tx="3" ty="0" />
-    <tile x="11" y="13" tx="2" ty="0" />
     <tile x="11" y="14" tx="0" ty="0" />
     <tile x="11" y="15" tx="1" ty="0" />
     <tile x="11" y="16" tx="1" ty="0" />
     <tile x="12" y="0" tx="7" ty="0" />
     <tile x="12" y="1" tx="7" ty="0" />
     <tile x="12" y="2" tx="7" ty="0" />
-    <tile x="12" y="12" tx="3" ty="0" />
-    <tile x="12" y="13" tx="2" ty="0" />
     <tile x="12" y="14" tx="0" ty="0" />
     <tile x="12" y="15" tx="1" ty="0" />
     <tile x="12" y="16" tx="1" ty="0" />
@@ -146,68 +132,42 @@
     <tile x="16" y="0" tx="7" ty="0" />
     <tile x="16" y="1" tx="7" ty="0" />
     <tile x="16" y="2" tx="7" ty="0" />
-    <tile x="16" y="10" tx="3" ty="0" />
-    <tile x="16" y="11" tx="2" ty="0" />
-    <tile x="16" y="12" tx="2" ty="0" />
-    <tile x="16" y="13" tx="2" ty="0" />
     <tile x="16" y="14" tx="0" ty="0" />
     <tile x="16" y="15" tx="1" ty="0" />
     <tile x="16" y="16" tx="1" ty="0" />
     <tile x="17" y="0" tx="7" ty="0" />
     <tile x="17" y="1" tx="7" ty="0" />
     <tile x="17" y="2" tx="7" ty="0" />
-    <tile x="17" y="10" tx="3" ty="0" />
-    <tile x="17" y="11" tx="2" ty="0" />
-    <tile x="17" y="12" tx="2" ty="0" />
-    <tile x="17" y="13" tx="2" ty="0" />
     <tile x="17" y="14" tx="0" ty="0" />
     <tile x="17" y="15" tx="1" ty="0" />
     <tile x="17" y="16" tx="1" ty="0" />
     <tile x="18" y="0" tx="7" ty="0" />
     <tile x="18" y="1" tx="7" ty="0" />
     <tile x="18" y="2" tx="7" ty="0" />
-    <tile x="18" y="11" tx="3" ty="0" />
-    <tile x="18" y="12" tx="2" ty="0" />
-    <tile x="18" y="13" tx="2" ty="0" />
     <tile x="18" y="14" tx="0" ty="0" />
     <tile x="18" y="15" tx="1" ty="0" />
     <tile x="18" y="16" tx="1" ty="0" />
     <tile x="19" y="0" tx="7" ty="0" />
     <tile x="19" y="1" tx="7" ty="0" />
     <tile x="19" y="2" tx="7" ty="0" />
-    <tile x="19" y="11" tx="3" ty="0" />
-    <tile x="19" y="12" tx="2" ty="0" />
-    <tile x="19" y="13" tx="2" ty="0" />
     <tile x="19" y="14" tx="0" ty="0" />
     <tile x="19" y="15" tx="1" ty="0" />
     <tile x="19" y="16" tx="1" ty="0" />
     <tile x="20" y="0" tx="7" ty="0" />
     <tile x="20" y="1" tx="7" ty="0" />
     <tile x="20" y="2" tx="7" ty="0" />
-    <tile x="20" y="10" tx="3" ty="0" />
-    <tile x="20" y="11" tx="2" ty="0" />
-    <tile x="20" y="12" tx="2" ty="0" />
-    <tile x="20" y="13" tx="2" ty="0" />
     <tile x="20" y="14" tx="0" ty="0" />
     <tile x="20" y="15" tx="1" ty="0" />
     <tile x="20" y="16" tx="1" ty="0" />
     <tile x="21" y="0" tx="7" ty="0" />
     <tile x="21" y="1" tx="7" ty="0" />
     <tile x="21" y="2" tx="7" ty="0" />
-    <tile x="21" y="10" tx="3" ty="0" />
-    <tile x="21" y="11" tx="2" ty="0" />
-    <tile x="21" y="12" tx="2" ty="0" />
-    <tile x="21" y="13" tx="2" ty="0" />
     <tile x="21" y="14" tx="0" ty="0" />
     <tile x="21" y="15" tx="1" ty="0" />
     <tile x="21" y="16" tx="1" ty="0" />
     <tile x="22" y="0" tx="7" ty="0" />
     <tile x="22" y="1" tx="7" ty="0" />
     <tile x="22" y="2" tx="7" ty="0" />
-    <tile x="22" y="10" tx="3" ty="0" />
-    <tile x="22" y="11" tx="2" ty="0" />
-    <tile x="22" y="12" tx="2" ty="0" />
-    <tile x="22" y="13" tx="2" ty="0" />
     <tile x="22" y="14" tx="0" ty="0" />
     <tile x="22" y="15" tx="1" ty="0" />
     <tile x="22" y="16" tx="1" ty="0" />
@@ -230,6 +190,8 @@
     <tile x="25" y="0" tx="7" ty="0" />
     <tile x="25" y="1" tx="7" ty="0" />
     <tile x="25" y="2" tx="7" ty="0" />
+    <tile x="25" y="10" tx="3" ty="0" />
+    <tile x="25" y="11" tx="2" ty="0" />
     <tile x="25" y="12" tx="0" ty="0" />
     <tile x="25" y="13" tx="1" ty="0" />
     <tile x="25" y="14" tx="1" ty="0" />
@@ -238,11 +200,9 @@
     <tile x="26" y="0" tx="7" ty="0" />
     <tile x="26" y="1" tx="7" ty="0" />
     <tile x="26" y="2" tx="7" ty="0" />
-    <tile x="26" y="8" tx="0" ty="0" />
-    <tile x="26" y="9" tx="1" ty="0" />
-    <tile x="26" y="10" tx="1" ty="0" />
-    <tile x="26" y="11" tx="1" ty="0" />
-    <tile x="26" y="12" tx="1" ty="0" />
+    <tile x="26" y="10" tx="3" ty="0" />
+    <tile x="26" y="11" tx="2" ty="0" />
+    <tile x="26" y="12" tx="0" ty="0" />
     <tile x="26" y="13" tx="1" ty="0" />
     <tile x="26" y="14" tx="1" ty="0" />
     <tile x="26" y="15" tx="1" ty="0" />
@@ -360,7 +320,12 @@
     <tile x="34" y="16" tx="1" ty="0" />
   </terrain>
   <entities>
-    <spawn id="1" x="180" y="396" />
-    <exit id="2" x="1080" y="216" />
+    <speech id="0" x="108" y="324" width="144" height="180" value="Hello there!" />
+    <spawn id="3" x="180" y="432" />
+    <speech id="1" x="468" y="324" width="108" height="180" value="I mean what&#xD;&#xA;is this place?" />
+    <speech id="4" x="432" y="324" width="36" height="180" value="Where the f***&#xD;&#xA;am I ?!" />
+    <speech id="5" x="684" y="324" width="144" height="180" value="Move me around&#xD;&#xA;with A, D, Left or Right,&#xD;&#xA;and make me jump&#xD;&#xA;with Up or W&#xD;&#xA;will you?" />
+    <exit id="6" x="1116" y="216" />
+    <speech id="2" x="972" y="180" width="108" height="108" value="Let's get&#xD;&#xA;out of here" />
   </entities>
 </level>

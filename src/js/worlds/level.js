@@ -10,12 +10,13 @@ define([
 		"gameobjects/obstacle",
 		"gameobjects/trap",
 		"gameobjects/exit",
+		"gameobjects/speech",
 		"components/gamecontroller",
 		"components/pausecontroller",
 		"components/terraincollisionclamper",
 		"events"
 	]
-	, function (World, Player, Obstacle, Trap, Exit, GameController, PauseController, TerrainCollisionClamper, Events)
+	, function (World, Player, Obstacle, Trap, Exit, Speech, GameController, PauseController, TerrainCollisionClamper, Events)
 	{
 		Level.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -119,15 +120,21 @@ define([
 				{
 					case "spawn":
 					{
-						//this._player = new Player(parseFloat(entity.x), parseFloat(entity.y));
-						this.addChild(new Player(parseFloat(entity.x), parseFloat(entity.y)));
+						var player = new Player(parseFloat(entity.x), parseFloat(entity.y))
+						if (this._data.power == "False") player.hasPower = false;
+						this.addChild(player);
 						break;
 					}
 
 					case "exit":
 					{
-						//this._player = new Player(parseFloat(entity.x), parseFloat(entity.y));
 						this.addChild(new Exit(parseFloat(entity.x), parseFloat(entity.y)));
+						break;
+					}
+
+					case "speech":
+					{
+						this.addChild(new Speech(entity.value, parseFloat(entity.x), parseFloat(entity.y), parseFloat(entity.width), parseFloat(entity.height)));
 						break;
 					}
 

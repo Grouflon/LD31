@@ -7,6 +7,7 @@ if (typeof define !== 'function') {
 define([
 		"playgroundjs/gameobject",
 		"playgroundjs/graphics/sprite",
+		"playgroundjs/graphics/text",
 		"playgroundjs/colliders/aabbcollider",
 		"playgroundjs/input/keyboard",
 		"playgroundjs/utils/keys",
@@ -16,7 +17,7 @@ define([
 		"components/cameratracking",
 		"events"
 	]
-	, function (GameObject, Sprite, AABBCollider, Keyboard, Keys, Resources, PlatformerMover, Repeater, CameraTracking, Events)
+	, function (GameObject, Sprite, Text, AABBCollider, Keyboard, Keys, Resources, PlatformerMover, Repeater, CameraTracking, Events)
 	{
 		Player.prototype = Object.create(GameObject.prototype);
 		/**** PUBLIC ****/
@@ -24,6 +25,8 @@ define([
 		Object.defineProperty(Player.prototype, "facing", {
 			get: function() { return this._facing; }
 		});
+
+		Player.prototype.hasPower = true;
 
 		function Player(x, y)
 		{
@@ -63,6 +66,11 @@ define([
 			this._cameraTracking = new CameraTracking();
 			this.addChild(this._cameraTracking);
 
+			this._speechText = new Text("", "#fff", 15);
+			this._speechText.layer = 6;
+			this._speechText.visible = false;
+			this.addChild(this._speechText);
+
 			this._boundOnEnterPause = Events.sGameEnterPause.add(this._onEnterPause.bind(this));
 			this._boundOnExitPause = Events.sGameExitPause.add(this._onExitPause.bind(this));
 		}
@@ -90,12 +98,27 @@ define([
 
 			if (this.collideFirst(this.x, this.y, "trap")) { this.die(); }
 			if (this.collideFirst(this.x, this.y, "exit")) { this.exit(); }
+
+			// SPEECH
+			var speech;
+			this._speechText.visible = false;
+			if (speech = this.collideFirst(this.x, this.y, "speech")) { this.speech(speech.value); }
 		};
 
 		Player.prototype.togglePower = function()
 		{
-			this._repeater.enabled = !this._repeater.enabled;
-			this._cameraTracking.enabled = !this._cameraTracking.enabled;
+			if (this.hasPower)
+			{
+				this._repeater.enabled = !this._repeater.enabled;
+				this._cameraTracking.enabled = !this._cameraTracking.enabled;
+			}
+		};
+
+		Player.prototype.speech = function(value)
+		{
+			this._speechText.visible = true;
+			this._speechText.text = value;
+			this._speechText.y = - this._sprites[0].height - this._speechText.height + 8;
 		};
 
 		Player.prototype.die = function()
@@ -136,6 +159,7 @@ define([
 			}
 		};
 
+		Player.prototype._speechText = null;
 		Player.prototype._sprites = null;
 		Player.prototype._paused = false;
 		Player.prototype._facing = 1;
