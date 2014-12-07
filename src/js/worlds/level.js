@@ -35,16 +35,27 @@ define([
 			this.addChild(new GameController);
 			this.addChild(new PauseController);
 			this.addChild(new TerrainCollisionClamper);
+			this._generateLevel(this._data);
 		}
 
 		Level.prototype.begin = function()
 		{
-			this._generateLevel(this._data);
+			this._generateEntities(this._data.childNodes[1]);
 		};
 
 		Level.prototype.update = function(elapsed)
 		{
 
+		};
+
+		Level.prototype._update = function(elapsed)
+		{
+			if (this._firstRound)
+			{
+				elapsed = 0;
+				this._firstRound = false;
+			}
+			World.prototype._update.call(this, elapsed);
 		};
 
 		Level.prototype.end = function(elapsed)
@@ -70,11 +81,11 @@ define([
 						break;
 					}
 
-					case "entities":
+					/*case "entities":
 					{
 						this._generateEntities(node.childNodes[i]);
 						break;
-					}
+					}*/
 
 					default: break;
 				}
@@ -124,6 +135,8 @@ define([
 				}
 			}
 		};
+
+		Level.prototype._firstRound = true;
 
 		Level.prototype._levelWidth = 0;
 		Level.prototype._levelHeight = 0;

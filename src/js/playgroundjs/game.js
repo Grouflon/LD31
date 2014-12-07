@@ -117,7 +117,6 @@ define([
                 this._world = this._nextWorld;
                 this._nextWorld = null;
 				this._world._game = this;
-				this._world.begin();
 				this._logInfo("Started world \"" + this._world.name + "\"");
             }
         };

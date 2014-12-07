@@ -98,6 +98,11 @@ define([
 
         World.prototype._update = function(elapsed)
         {
+			if (!this._started)
+			{
+				this.begin();
+				this._started = true;
+			}
             var recUpdate = function(node)
             {
                 if (typeof node.enabled !== "undefined" && !node.enabled) return;
@@ -160,6 +165,7 @@ define([
 
         World.prototype._game = null;
         World.prototype._camera = null;
+        World.prototype._started = false;
 
 
         /*Object.defineProperty(World.prototype, "camera", {

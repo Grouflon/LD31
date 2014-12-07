@@ -16,7 +16,7 @@ define([
 		/**** PUBLIC ****/
 		PlatformerMover.prototype.gravity = 1600.0;
 		PlatformerMover.prototype.speed = 200.0;
-		PlatformerMover.prototype.jumpImpulse = 620.0;
+		PlatformerMover.prototype.jumpImpulse = 650.0;
 		PlatformerMover.prototype.acceleration = 0.4;
 		PlatformerMover.prototype.deceleration = 0.8;
 		PlatformerMover.prototype.stopThreshold = 0.1;
