@@ -53,7 +53,8 @@ define([
 				"data/maps/level3.oel",
 				"data/maps/level4.oel",
 				"data/maps/level5.oel",
-				"data/maps/level6.oel"
+				"data/maps/level6.oel",
+				"data/maps/level7.oel"
 			],
 			_currentLevel: 6,
 			_game: null
