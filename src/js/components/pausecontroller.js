@@ -62,6 +62,16 @@ define([
 				if (Keyboard.pressed(Keys.UP) || Keyboard.pressed(Keys.W)) this._currentMenuItem = (this._currentMenuItem + this._menuItems.length - 1) % this._menuItems.length;
 				if (Keyboard.pressed(Keys.DOWN) || Keyboard.pressed(Keys.S)) this._currentMenuItem = (this._currentMenuItem + this._menuItems.length + 1) % this._menuItems.length;
 
+				if (Keyboard.pressed(Keys.ENTER))
+				{
+					switch (this._currentMenuItem)
+					{
+						case 0: { this.togglePause(); break; }
+						case 1: { LevelManager.restartLevel(); break; }
+						default: break;
+					}
+				}
+
 				for (var i in this._menuItems)
 				{
 					if (i == this._currentMenuItem) this._menuItems[i].color = "#fff";
