@@ -54,9 +54,10 @@ define([
 				"data/maps/level4.oel",
 				"data/maps/level5.oel",
 				"data/maps/level6.oel",
-				"data/maps/level7.oel"
+				"data/maps/level7.oel",
+				"data/maps/level8.oel"
 			],
-			_currentLevel: 6,
+			_currentLevel: 0,
 			_game: null
 		};
 	});
