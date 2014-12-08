@@ -20,6 +20,8 @@ define([
 		Resources.loadImage("tileset", "images/tileset.png");
 		Resources.loadImage("bot_sprite", "images/bot_sprite.png");
 		Resources.loadImage("door", "images/door.png");
+		Resources.loadImage("start_screen", "images/splash_screen.png");
+		Resources.loadImage("end_screen", "images/end_screen.png");
 		LevelManager.init(game, Level);
 		game._canvas.style.setProperty("background", "linear-gradient(to bottom, #501c41 0%,#263332 85%)");
 

@@ -9,9 +9,10 @@ define([
 		"playgroundjs/resources",
 		"playgroundjs/graphics/rectangle",
 		"playgroundjs/graphics/text",
-		"levelmanager"
+		"levelmanager",
+		"worlds/startscreen"
 	]
-	, function (World, Resources, Rectangle, Text, LevelManager)
+	, function (World, Resources, Rectangle, Text, LevelManager, StartScreen)
 	{
 		Loading.prototype = Object.create(World.prototype);
 		/**** PUBLIC ****/
@@ -32,7 +33,8 @@ define([
 
 		Loading.prototype.update = function(elapsed)
 		{
-			if (Resources.allResourcesLoaded) LevelManager.setLevel(LevelManager._currentLevel);
+			//if (Resources.allResourcesLoaded) LevelManager.setLevel(LevelManager._currentLevel);
+			if (Resources.allResourcesLoaded) this.game.world = new StartScreen;
 		};
 
 		/**** PRIVATE ****/

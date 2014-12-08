@@ -5,9 +5,10 @@ if (typeof define !== 'function') {
  * Level Manager
  * ===================================*/
 define([
-		"playgroundjs/resources"
+		"playgroundjs/resources",
+		"worlds/endscreen"
 	]
-	, function (Resources)
+	, function (Resources, EndScreen)
 	{
 		return {
 
@@ -29,8 +30,12 @@ define([
 
 			setLevel: function(index)
 			{
-				this._game.world = new this._Level(Resources.get ("level" + (index % this._levels.length)).value);
-				this._currentLevel = index;
+				if (index >= this._levels.length) this._game.world = new EndScreen;
+				else
+				{
+					this._game.world = new this._Level(Resources.get ("level" + (index % this._levels.length)).value);
+					this._currentLevel = index;
+				}
 			},
 
 			nextLevel: function()
@@ -48,7 +53,7 @@ define([
 				"data/maps/level3.oel",
 				"data/maps/level4.oel"
 			],
-			_currentLevel: 1,
+			_currentLevel: 0,
 			_game: null
 		};
 	});
