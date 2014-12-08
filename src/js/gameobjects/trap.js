@@ -20,7 +20,7 @@ define([
 			GameObject.call(this, "Obstacle", x, y);
 
 			var sprite = new Sprite(Resources.get("tileset").value, 36, 36);
-			sprite.setFrame(1);
+			sprite.setFrame(8);
 			this.addChild(sprite);
 			this.addChild(new AABBCollider(36, 36, 0, 0, "trap"));
 		}
